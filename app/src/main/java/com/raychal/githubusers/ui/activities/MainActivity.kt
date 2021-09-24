@@ -2,6 +2,7 @@ package com.raychal.githubusers.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -26,18 +27,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
-        setSupportActionBar(mainBinding.toolbar)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         nController = navHostFragment.navController
-        NavigationUI.setupWithNavController(mainBinding.bottomNavView, nController)
         appBarConfiguration = AppBarConfiguration(nController.graph)
-        nController.addOnDestinationChangedListener { _, destination, _ ->
-            when(destination.id){
-                R.id.details_destination -> mainBinding.bottomNavView.visibility = View.GONE
-                else -> mainBinding.bottomNavView.visibility = View.VISIBLE
-            }
-        }
         setupActionBarWithNavController(nController, appBarConfiguration)
+
+//        if (nController != null){
+//            Log.d("text", "nController not null")
+//        } else if (appBarConfiguration != null){
+//            Log.d("text", "appBarConfiguration not null")
+//        } else if (nController.graph != null){
+//            Log.d("text", "nController.graph not null")
+//        } else if (mainBinding != null){
+//            Log.d("text", "mainBinding not null")
+//        } else {
+//            Log.d("text", "all not null")
+//        }
 
         userViewModel = ViewModelProvider(
             viewModelStore,

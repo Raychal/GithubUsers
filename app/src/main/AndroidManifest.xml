@@ -35,11 +35,5 @@
             <nav-graph android:value="@navigation/main_navigation"/>
         </activity>
         <activity android:name=".ui.activities.MainActivity" />
-<!--        <provider-->
-<!--            android:name=".provider.ContentProvider"-->
-<!--            android:authorities="com.raychal.githubusers"-->
-<!--            android:exported="true"-->
-<!--            android:readPermission="com.raychal.githubusers.READ_DATABASE"-->
-<!--            android:writePermission="com.raychal.githubusers.WRITE_DATABASE" />-->
     </application>
 </manifest>

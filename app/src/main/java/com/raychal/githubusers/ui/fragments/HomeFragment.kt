@@ -1,6 +1,7 @@
 package com.raychal.githubusers.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.appbar.AppBarLayout
 import com.raychal.githubusers.R
 import com.raychal.githubusers.ui.adapter.UserAdapter
 import com.raychal.githubusers.databinding.FragmentHomeBinding
 import com.raychal.githubusers.viewmodel.HomeViewModel
 import com.raychal.githubusers.utils.state.ShowState
 import com.raychal.githubusers.utils.state.State
+import com.raychal.githubusers.utils.viewUtils.changeNavigation
+import kotlin.math.abs
 
 class HomeFragment : Fragment() {
 
@@ -36,6 +40,42 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
             .get(HomeViewModel::class.java)
+
+        val myTitle = resources.getString(R.string.app_name)
+        Log.d("title", myTitle)
+
+        homeBinding.textTitle.text = myTitle
+
+        homeBinding.appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            if (abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
+                Log.e("AppBarLayout", "collapsed")
+                homeBinding.toolbarLayout.title = myTitle
+            } else {
+                Log.e("AppBarLayout", "expanded")
+                homeBinding.toolbarLayout.title = ""
+            }
+        })
+
+        homeBinding.apply {
+            toolbar.apply {
+                inflateMenu(R.menu.main_menu)
+                setOnMenuItemClickListener {
+                    when (it.itemId){
+                        R.id.favorite_destination -> {
+                            val action =
+                                HomeFragmentDirections.actionHomeDestinationToFavoriteDestination()
+                            view.changeNavigation(action)
+                        }
+                        R.id.settings_destination -> {
+                            val action =
+                                HomeFragmentDirections.actionHomeDestinationToSettingsFragment()
+                            view.changeNavigation(action)
+                        }
+                    }
+                    false
+                }
+            }
+        }
 
         homeAdapter = UserAdapter(arrayListOf()) { username, iv ->
             findNavController().navigate(
