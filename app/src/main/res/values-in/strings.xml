@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="follower">Pengikut</string>
+    <string name="following">Mengikuti</string>
+    <string name="search_hint">Masukkan Nama Pengguna Github..</string>
+    <string name="not_found">Pegguna Tidak Ditemukan</string>
+    <string name="not_have">%1$s Tidak Memiliki %2$s</string>
+    <string name="change_language_settings">Ubah Pengaturan Bahasa</string>
+    <string name="created_by_raychal_ababil">Dibuat oleh : Raychal Ababil</string>
+    <string name="online">Daring</string>
+    <string name="no_data_available">Tidak ada data yang tersedia</string>
+    <string name="favorite">Disukai</string>
+    <string name="settings">Pengaturan</string>
+    <string name="reminder_time">Pengingat pada 9:00 Pagi</string>
+    <string name="favorite_add">%s Ditambahkan ke Favorite</string>
+    <string name="favorite_remove">%s Dihapus dari Favorite</string>
+    <string name="language">Bahasa</string>
+    <string name="home">Utama</string>
+</resources>
