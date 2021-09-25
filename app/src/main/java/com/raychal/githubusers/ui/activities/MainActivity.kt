@@ -14,6 +14,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.raychal.githubusers.R
 import com.raychal.githubusers.databinding.ActivityMainBinding
 import com.raychal.githubusers.ui.adapter.UserAdapter
+import com.raychal.githubusers.ui.fragments.HomeFragmentDirections
+import com.raychal.githubusers.utils.viewUtils.changeNavigation
 import com.raychal.githubusers.viewmodel.UserViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
+        setToolbar()
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         nController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(nController.graph)
@@ -53,6 +56,30 @@ class MainActivity : AppCompatActivity() {
                 usersAdapter.setData(users)
             }
         })
+    }
+
+    private fun setToolbar(){
+        mainBinding.apply {
+            setSupportActionBar(mainBinding.toolbar)
+            toolbar.apply {
+                inflateMenu(R.menu.main_menu)
+                setOnMenuItemClickListener {
+                    when (it.itemId){
+                        R.id.favorite_destination -> {
+                            val action =
+                                HomeFragmentDirections.actionHomeDestinationToFavoriteDestination()
+                            changeNavigation(action)
+                        }
+                        R.id.settings_destination -> {
+                            val action =
+                                HomeFragmentDirections.actionHomeDestinationToSettingsFragment()
+                            changeNavigation(action)
+                        }
+                    }
+                    false
+                }
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

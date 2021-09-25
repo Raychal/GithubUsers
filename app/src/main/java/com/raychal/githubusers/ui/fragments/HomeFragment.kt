@@ -13,8 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.raychal.githubusers.R
-import com.raychal.githubusers.ui.adapter.UserAdapter
 import com.raychal.githubusers.databinding.FragmentHomeBinding
+import com.raychal.githubusers.ui.adapter.UserAdapter
 import com.raychal.githubusers.viewmodel.HomeViewModel
 import com.raychal.githubusers.utils.state.ShowState
 import com.raychal.githubusers.utils.state.State
@@ -56,26 +56,9 @@ class HomeFragment : Fragment() {
             }
         })
 
-        homeBinding.apply {
-            toolbar.apply {
-                inflateMenu(R.menu.main_menu)
-                setOnMenuItemClickListener {
-                    when (it.itemId){
-                        R.id.favorite_destination -> {
-                            val action =
-                                HomeFragmentDirections.actionHomeDestinationToFavoriteDestination()
-                            view.changeNavigation(action)
-                        }
-                        R.id.settings_destination -> {
-                            val action =
-                                HomeFragmentDirections.actionHomeDestinationToSettingsFragment()
-                            view.changeNavigation(action)
-                        }
-                    }
-                    false
-                }
-            }
-        }
+//        homeBinding.apply {
+//
+//        }
 
         homeAdapter = UserAdapter(arrayListOf()) { username, iv ->
             findNavController().navigate(
