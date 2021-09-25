@@ -16,4 +16,5 @@
     <string name="favorite_remove">%s Dihapus dari Favorite</string>
     <string name="language">Bahasa</string>
     <string name="home">Utama</string>
+    <string name="search">Cari</string>
 </resources>

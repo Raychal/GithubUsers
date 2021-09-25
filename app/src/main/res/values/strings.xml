@@ -12,6 +12,7 @@
     <string name="no_data_available">No Data Available</string>
     <string name="follower">Follower</string>
     <string name="following">Following</string>
+    <string name="search">Search</string>
     <string name="search_hint">Input Github Username First..</string>
     <string name="not_have">%1$s Not Have %2$s</string>
     <string name="not_found">User Not Found</string>

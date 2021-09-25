@@ -24,6 +24,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://api.github.com\""
+            buildConfigField "String", "TOKEN", "\"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\""
+        }
+        debug {
+            buildConfigField "String", "BASE_URL", "\"https://api.github.com\""
+            buildConfigField "String", "TOKEN", "\"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\""
         }
     }
     buildFeatures{

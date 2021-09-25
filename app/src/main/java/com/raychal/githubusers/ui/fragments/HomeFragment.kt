@@ -18,7 +18,6 @@ import com.raychal.githubusers.ui.adapter.UserAdapter
 import com.raychal.githubusers.viewmodel.HomeViewModel
 import com.raychal.githubusers.utils.state.ShowState
 import com.raychal.githubusers.utils.state.State
-import com.raychal.githubusers.utils.viewUtils.changeNavigation
 import kotlin.math.abs
 
 class HomeFragment : Fragment() {

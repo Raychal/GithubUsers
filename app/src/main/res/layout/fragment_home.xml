@@ -53,13 +53,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--            <androidx.appcompat.widget.Toolbar-->
-<!--                android:id="@+id/toolbar"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layout_collapseMode="pin"-->
-<!--                app:popupTheme="@style/Widget.AppCompat.Light.PopupMenu.Overflow"/>-->
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,7 +64,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:layout_weight="1"
@@ -91,7 +84,7 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -102,9 +95,8 @@
             <include
                 android:id="@+id/baseLoading"
                 layout="@layout/base_loading_main"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -122,18 +114,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/item_row_user" />
 
+            <include
+                android:id="@+id/base_empty_home"
+                layout="@layout/base_empty_user"
+                android:layout_width="match_parent"
+                android:layout_height="485dp"
+                android:layout_marginTop="240dp"
+                android:visibility="visible"
+                app:layout_anchorGravity="center"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-    <include
-        android:id="@+id/base_empty_home"
-        layout="@layout/base_empty_user"
-        android:layout_width="match_parent"
-        android:layout_height="484dp"
-        android:layout_marginTop="240dp"
-        android:visibility="visible"
-        app:layout_anchor="@+id/nestedScrollView"
-        app:layout_anchorGravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
