@@ -76,8 +76,8 @@ dependencies {
     //lottie annimation
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
-//    //Library EditText
-//    implementation "com.ndroid:cool-view:$cool_search_view"
+    // data store
+    implementation "androidx.datastore:datastore-preferences:$ds_version"
 
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -108,7 +108,6 @@ dependencies {
 
     //Custom UI
     implementation "com.github.Shashank02051997:FancyToast-Android:$fancy_version"
-//    implementation "com.victor:lib:$victor_version"
     implementation "androidx.preference:preference-ktx:$preference"
 
     //Database

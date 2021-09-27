@@ -7,7 +7,7 @@ buildscript {
     ext.nav_version = "2.3.5"
     ext.retrofit_version = "2.9.0"
     ext.nav_version = "2.3.5"
-    ext.glide_version = "4.11.0"
+    ext.glide_version = "4.12.0"
     ext.gson_version = "2.8.6"
     ext.coroutine_version = "1.5.0"
     ext.logging_interceptor_version = "4.9.0"
@@ -19,6 +19,7 @@ buildscript {
     ext.fancy_version = "0.1.8"
 //    ext.victor_version = "1.0.4"
     ext.preference = "1.1.1"
+    ext.ds_version = "1.0.0"
 
     repositories {
         google()
