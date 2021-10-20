@@ -17,4 +17,8 @@
     <string name="language">Bahasa</string>
     <string name="home">Utama</string>
     <string name="search">Cari</string>
+    <string name="ubah_bahasa">Ubah Bahasa</string>
+    <string name="dark_themes">Tema Gelap</string>
+    <string name="dark_themes_on">Tema Gelap Nyala</string>
+    <string name="dark_themes_off">Tema Gelap Mati</string>
 </resources>

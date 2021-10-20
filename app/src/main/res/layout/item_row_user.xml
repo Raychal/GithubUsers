@@ -69,7 +69,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ivUser"
             app:layout_constraintTop_toTopOf="@id/txtUsername"
-            app:drawableStartCompat="@drawable/ic_brightness" />
+            app:drawableStartCompat="@drawable/ic_online" />
 
         <ImageView
             android:layout_width="48dp"

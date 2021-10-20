@@ -8,7 +8,6 @@ import com.squareup.moshi.Json
 import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "user_table")
-@Parcelize
 data class GithubUser (
     @PrimaryKey(autoGenerate = false)
     @field:Json(name = "id")
@@ -57,4 +56,4 @@ data class GithubUser (
     @ColumnInfo(name = "following")
     @field:Json(name = "following")
     val following: Int
-): Parcelable
+)

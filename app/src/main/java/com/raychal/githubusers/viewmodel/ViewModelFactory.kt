@@ -2,14 +2,14 @@ package com.raychal.githubusers.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.raychal.githubusers.ui.fragments.SettingsFragment
+import com.raychal.githubusers.ui.SettingPreference
 import java.lang.IllegalArgumentException
 
-class ViewModelFactory (private val pref: SettingsFragment) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory (private val pref: SettingPreference) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(pref) as T
+        if (modelClass.isAssignableFrom(SettingViewModel::class.java)) {
+            return SettingViewModel(pref) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

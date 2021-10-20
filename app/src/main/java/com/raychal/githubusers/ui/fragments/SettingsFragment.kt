@@ -1,68 +1,92 @@
 package com.raychal.githubusers.ui.fragments
 
-import android.content.SharedPreferences
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.raychal.githubusers.R
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import com.raychal.githubusers.databinding.FragmentSettingsBinding
+import com.raychal.githubusers.ui.SettingPreference
+import com.raychal.githubusers.ui.adapter.UserAdapter
+import com.raychal.githubusers.viewmodel.SettingViewModel
+import com.raychal.githubusers.viewmodel.ViewModelFactory
 
-class SettingsFragment private constructor(private val dataStore: DataStore<Preferences>): PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-    private val THEME_KEY = booleanPreferencesKey("theme_setting")
+class SettingsFragment : Fragment(), View.OnClickListener {
 
-    fun getThemeSetting(): Flow<Boolean> {
-        return dataStore.data.map {
-            preferences -> preferences[THEME_KEY] ?: false
-        }
-    }
+    private lateinit var settingsBinding: FragmentSettingsBinding
+    private lateinit var settingAdapter: UserAdapter
 
-    suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
-        dataStore.edit { preferences ->
-            preferences[THEME_KEY] = isDarkModeActive
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.title = context?.getString(R.string.settings)
+        settingsBinding = FragmentSettingsBinding.inflate(inflater, container, false)
+        return settingsBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.title = context?.getString(R.string.settings)
+
+        settingAdapter = UserAdapter(arrayListOf()) { username, iv ->
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeDestinationToSettingsFragment(),
+                FragmentNavigatorExtras(
+                    iv to username
+                )
+            )
+        }
+
+        observeChangeLanguage()
+        observeSwitch()
     }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.settings_preference, rootKey)
+    private fun observeChangeLanguage() {
+        val languange = settingsBinding.ubahBahasa
+
+        languange.setOnClickListener(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-        preferenceScreen.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        preferenceScreen.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
-    }
-
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-    }
-
-    companion object {
-        @Volatile
-        private var INSTANCE: SettingsFragment? = null
-
-        fun getInstance(dataStore: DataStore<Preferences>): SettingsFragment {
-            return INSTANCE ?: synchronized(this) {
-                val instance = SettingsFragment(dataStore)
-                INSTANCE = instance
-                instance
-            }
+    private fun observeSwitch() {
+        val switch = settingsBinding.themeSwitch
+        val pref = SettingPreference.getInstance(requireContext().dataStore)
+        val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+            SettingViewModel::class.java
+        )
+        settingViewModel.getThemeSettings().observe(viewLifecycleOwner,
+            { isDarkModeActive: Boolean ->
+                if (isDarkModeActive) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    switch.isChecked = true
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    switch.isChecked = false
+                }
+            })
+        switch.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            settingViewModel.saveThemeSettings(isChecked)
         }
     }
+
+    override fun onClick(v: View?) {
+        val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+        startActivity(intent)
+    }
 }
+
