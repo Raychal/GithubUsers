@@ -47,7 +47,6 @@
             android:layout_toEndOf="@id/ivUser"
             android:maxLines="1"
             android:text="@{data.login}"
-            android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ivUser"

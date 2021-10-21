@@ -17,15 +17,6 @@ object UserRetrofit {
         }
     }
 
-//    fun getDetailUser(username: String) = liveData(Dispatchers.IO) {
-//        emit(ResultState.loading(null))
-//        try {
-//            emit(ResultState.success(Network.networkService.getDetailUser(username)))
-//        } catch (exception: Exception) {
-//            emit(ResultState.error(null, exception.message ?: "Error"))
-//        }
-//    }
-
     fun getFollowers(username: String) = liveData(Dispatchers.IO) {
         emit(ResultState.loading(null))
         try {

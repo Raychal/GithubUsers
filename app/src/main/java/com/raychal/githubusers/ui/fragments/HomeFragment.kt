@@ -55,10 +55,6 @@ class HomeFragment : Fragment() {
             }
         })
 
-//        homeBinding.apply {
-//
-//        }
-
         homeAdapter = UserAdapter(arrayListOf()) { username, iv ->
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeDestinationToDetailsDestination(username),

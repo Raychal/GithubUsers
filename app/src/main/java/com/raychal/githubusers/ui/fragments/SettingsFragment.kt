@@ -15,12 +15,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import com.raychal.githubusers.R
 import com.raychal.githubusers.databinding.FragmentSettingsBinding
 import com.raychal.githubusers.ui.SettingPreference
-import com.raychal.githubusers.ui.adapter.UserAdapter
 import com.raychal.githubusers.viewmodel.SettingViewModel
 import com.raychal.githubusers.viewmodel.ViewModelFactory
 
@@ -29,14 +26,11 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class SettingsFragment : Fragment(), View.OnClickListener {
 
     private lateinit var settingsBinding: FragmentSettingsBinding
-    private lateinit var settingAdapter: UserAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.title = context?.getString(R.string.settings)
         settingsBinding = FragmentSettingsBinding.inflate(inflater, container, false)
         return settingsBinding.root
     }
@@ -44,14 +38,8 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        settingAdapter = UserAdapter(arrayListOf()) { username, iv ->
-            findNavController().navigate(
-                HomeFragmentDirections.actionHomeDestinationToSettingsFragment(),
-                FragmentNavigatorExtras(
-                    iv to username
-                )
-            )
-        }
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.title = context?.getString(R.string.settings)
 
         observeChangeLanguage()
         observeSwitch()
@@ -59,7 +47,6 @@ class SettingsFragment : Fragment(), View.OnClickListener {
 
     private fun observeChangeLanguage() {
         val languange = settingsBinding.ubahBahasa
-
         languange.setOnClickListener(this)
     }
 

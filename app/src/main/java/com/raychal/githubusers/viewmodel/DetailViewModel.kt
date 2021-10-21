@@ -12,11 +12,7 @@ import kotlinx.coroutines.launch
 class DetailViewModel(app: Application) : AndroidViewModel(app) {
 
     private val userDao: UserDao = UserDatabase.getDatabase(app).userDao()
-    private val userFavoriteRetrofit: UserFavoriteRetrofit
-
-    init {
-        userFavoriteRetrofit = UserFavoriteRetrofit(userDao)
-    }
+    private val userFavoriteRetrofit: UserFavoriteRetrofit = UserFavoriteRetrofit(userDao)
 
     fun data(username: String): LiveData<ResultState<GithubUser>> = userFavoriteRetrofit.getDetailUser(username)
 
