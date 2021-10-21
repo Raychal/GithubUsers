@@ -2,7 +2,7 @@
 buildscript {
     ext.shimmer_version = "0.5.0"
     ext.lottieVersion = "3.4.1"
-    ext.kotlin_version = "1.5.30"
+    ext.kotlin_version = "1.5.31"
     ext.lifecycle_version = "2.3.1"
     ext.nav_version = "2.3.5"
     ext.retrofit_version = "2.9.0"
