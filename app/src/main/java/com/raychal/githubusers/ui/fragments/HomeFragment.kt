@@ -37,8 +37,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-            .get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[HomeViewModel::class.java]
 
         val myTitle = resources.getString(R.string.app_name)
         Log.d("title", myTitle)

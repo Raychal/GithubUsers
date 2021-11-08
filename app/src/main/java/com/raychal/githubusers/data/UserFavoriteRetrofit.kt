@@ -17,7 +17,11 @@ class UserFavoriteRetrofit(private val userDao: UserDao) {
         val user = userDao.getUserDetail(username)
         if (user != null){
             favorite.postValue(true)
-            emit(ResultState.loading(user))
+            try {
+                emit(ResultState.success(Network.networkService.getDetailUser(username)))
+            } catch (e: Exception){
+                emit(ResultState.error(null, e.message ?: "Error"))
+            }
         } else {
             favorite.postValue(false)
             try {

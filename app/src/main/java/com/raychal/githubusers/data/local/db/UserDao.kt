@@ -17,7 +17,7 @@ interface UserDao {
     suspend fun insertUser(user: GithubUser)
 
     @Delete
-    suspend fun deleteUser(model: GithubUser): Int
+    suspend fun deleteUser(user: GithubUser)
 
     @Query("DELETE FROM user_table")
     suspend fun deleteAll()

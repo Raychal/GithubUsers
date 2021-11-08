@@ -7,7 +7,7 @@ import java.lang.IllegalArgumentException
 
 class ViewModelFactory (private val pref: SettingPreference) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SettingViewModel::class.java)) {
             return SettingViewModel(pref) as T
         }

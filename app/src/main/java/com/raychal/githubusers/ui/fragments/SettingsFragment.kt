@@ -53,9 +53,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     private fun observeSwitch() {
         val switch = settingsBinding.themeSwitch
         val pref = SettingPreference.getInstance(requireContext().dataStore)
-        val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
-            SettingViewModel::class.java
-        )
+        val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref))[SettingViewModel::class.java]
         settingViewModel.getThemeSettings().observe(viewLifecycleOwner,
             { isDarkModeActive: Boolean ->
                 if (isDarkModeActive) {

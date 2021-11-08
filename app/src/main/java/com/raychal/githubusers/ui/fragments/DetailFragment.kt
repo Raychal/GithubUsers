@@ -1,6 +1,7 @@
 package com.raychal.githubusers.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,12 +18,12 @@ import com.raychal.githubusers.viewmodel.DetailViewModel
 import com.raychal.githubusers.utils.state.State
 import com.shashank.sony.fancytoastlib.FancyToast
 
-class DetailFragment : Fragment() {
+class DetailFragment : Fragment(), View.OnClickListener {
 
     private lateinit var detailBinding: FragmentDetailBinding
     private lateinit var pagerAdapter: PagerAdapter
     private lateinit var detailViewModel: DetailViewModel
-    private lateinit var githubUser: GithubUser
+    lateinit var githubUser: GithubUser
     private val args: DetailFragmentArgs by navArgs()
     private var isFavorite: Boolean = false
 
@@ -30,7 +31,7 @@ class DetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         detailViewModel = ViewModelProvider(
             this
-        ).get(DetailViewModel::class.java)
+        )[DetailViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -46,7 +47,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         detailBinding.content.transitionName = args.username
-        detailBinding.fabFavorite.setOnClickListener { addOrRemoveFavorite() }
+        detailBinding.fabFavorite.setOnClickListener(this)
 
         val tabList = arrayOf(
             resources.getString(R.string.follower),
@@ -66,6 +67,8 @@ class DetailFragment : Fragment() {
                 githubUser = it.data!!
                 detailBinding.data = it.data
             }
+            Log.d("state", it.state.toString())
+            Log.d("state", args.username)
         })
 
         detailViewModel.isFavorite.observe(viewLifecycleOwner, {
@@ -74,7 +77,7 @@ class DetailFragment : Fragment() {
         })
     }
 
-    private fun addOrRemoveFavorite() {
+    override fun onClick(v: View?) {
         if (!isFavorite){
             detailViewModel.addFavorite(githubUser)
             FancyToast.makeText(
@@ -83,7 +86,7 @@ class DetailFragment : Fragment() {
         } else {
             detailViewModel.removeFavorite(githubUser)
             FancyToast.makeText(
-                context, resources.getString(R.string.favorite_remove, githubUser.login), Toast.LENGTH_SHORT, FancyToast.SUCCESS, false
+                context, resources.getString(R.string.favorite_remove, githubUser.login), Toast.LENGTH_SHORT, FancyToast.ERROR, false
             ).show()
         }
     }

@@ -14,7 +14,8 @@ class UserDataSource(private val contentResolver: ContentResolver) {
             null,
             null,
             null,
-            null
+            null,
+            null,
         )
         cursor?.apply {
             while (moveToNext()) {

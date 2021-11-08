@@ -60,7 +60,7 @@ class FollowFragment : Fragment() {
 
         followViewModel = ViewModelProvider(
             this, ViewModelProvider.NewInstanceFactory()
-        ).get(FollowViewModel::class.java)
+        )[FollowViewModel::class.java]
 
         when (type) {
             resources.getString(R.string.following) -> followViewModel.setFollow(username, TypeView.FOLLOWING)

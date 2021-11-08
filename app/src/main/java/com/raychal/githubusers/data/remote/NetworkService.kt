@@ -26,6 +26,4 @@ interface NetworkService {
     suspend fun getFollowingUser(
         @Path("username") username: String?
     ) : List<GithubUser>
-
-
 }

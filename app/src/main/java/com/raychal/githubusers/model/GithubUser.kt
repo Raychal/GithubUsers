@@ -48,7 +48,7 @@ data class GithubUser (
 
     @ColumnInfo(name = "public_repos")
     @field:Json(name = "public_repos")
-    val publicRepos: Int,
+    val public_repos: Int,
 
     @ColumnInfo(name = "followers")
     @field:Json(name = "followers")
